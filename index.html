@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEBUILDWEB — Websites, Automation & AI That Grow Your Business</title>
+<meta name="description" content="WEBUILDWEB builds high-converting websites, AI chatbots, email automation, and appointment booking systems. We automate your business so you can scale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',system-ui,sans-serif;color:#d4d4d8;background:#000;-webkit-font-smoothing:antialiased;line-height:1.6;margin:0;padding:0;overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:'Orbitron',sans-serif;line-height:1.15;color:#fafafa;text-transform:uppercase;letter-spacing:.5px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{border:none;background:none;cursor:pointer;font-family:inherit}
+ul{list-style:none}
+
+:root{
+--red:#ef4444;--red-bright:#f87171;--red-deep:#dc2626;--red-dark:#991b1b;
+--red-glow:rgba(239,68,68,.12);--red-glow-strong:rgba(239,68,68,.25);
+--bg:#000;--bg-card:#0a0a0a;--bg-elevated:#141414;
+--fg:#fafafa;--fg-muted:#a1a1aa;--fg-dim:#71717a;
+--border:#1a1a1a;--border-light:#2a2a2a;
+--gradient:linear-gradient(135deg,#ef4444,#dc2626);
+--gradient-fire:linear-gradient(135deg,#ef4444,#f97316,#ef4444);
+--max-w:1200px;
+--mono:'JetBrains Mono',monospace;
+}
+
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+.text-center{text-align:center}
+
+/* --- Red Glow Text --- */
+.red-text{color:var(--red-bright)}
+.glow-text{color:var(--red);text-shadow:0 0 20px var(--red-glow-strong),0 0 60px rgba(239,68,68,.08)}
+.grad-text{background:var(--gradient-fire);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fireShimmer 4s linear infinite}
+@keyframes fireShimmer{0%{background-position:0% center}100%{background-position:300% center}}
+
+/* --- Buttons --- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;border-radius:4px;transition:all .25s;cursor:pointer;line-height:1;font-family:'Orbitron',sans-serif;letter-spacing:.5px;text-transform:uppercase;font-size:13px}
+.btn-lg{padding:18px 36px;font-size:14px}
+.btn-xl{padding:22px 48px;font-size:15px}
+.btn-sm{padding:10px 24px;font-size:12px}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 0 30px var(--red-glow),inset 0 1px 0 rgba(255,255,255,.1)}
+.btn-red:hover{background:var(--red-bright);transform:translateY(-2px);box-shadow:0 0 50px var(--red-glow-strong),0 8px 30px rgba(0,0,0,.5)}
+.btn-ghost{background:transparent;border:1px solid var(--border-light);color:var(--fg-muted)}
+.btn-ghost:hover{border-color:var(--red);color:var(--red-bright);box-shadow:0 0 20px var(--red-glow)}
+.btn-outline{background:transparent;border:1px solid var(--red);color:var(--red)}
+.btn-outline:hover{background:var(--red);color:#fff}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+
+/* --- Badge --- */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:2px;font-size:11px;font-weight:600;line-height:1.4;font-family:'Orbitron',sans-serif;letter-spacing:1.5px;text-transform:uppercase}
+.badge-red{background:var(--red-glow);color:var(--red-bright);border:1px solid rgba(239,68,68,.2)}
+.badge-outline{border:1px solid var(--border-light);color:var(--fg-dim)}
+
+/* --- Scanline Effect --- */
+.scanline{position:relative;overflow:hidden}
+.scanline::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(239,68,68,.01) 2px,rgba(239,68,68,.01) 4px);pointer-events:none;z-index:1}
+
+/* --- Navbar --- */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:50;padding:20px 24px;transition:all .3s}
+.navbar.scrolled{background:rgba(0,0,0,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 24px}
+.navbar-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:38px;height:38px;background:var(--red);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:14px;color:#fff}
+.logo-text{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;color:var(--fg);letter-spacing:2px}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-link{font-size:12px;font-weight:500;color:var(--fg-dim);transition:color .2s;font-family:'Orbitron',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.nav-link:hover{color:var(--red-bright)}
+.mobile-toggle{display:none;width:44px;height:44px;align-items:center;justify-content:center}
+.mobile-toggle svg{stroke:var(--fg);width:24px;height:24px}
+.mobile-menu{display:none;flex-direction:column;background:var(--bg-elevated);border:1px solid var(--border);margin-top:16px;padding:24px;gap:16px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:14px;font-weight:500;color:var(--fg-muted);font-family:'Orbitron',sans-serif;letter-spacing:1px;text-transform:uppercase}
+@media(max-width:768px){.nav-links{display:none!important}.mobile-toggle{display:flex}}
+
+/* --- Hero --- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:140px 24px 100px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(239,68,68,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(239,68,68,.04) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,black,transparent)}
+.hero-glow{position:absolute;border-radius:50%;filter:blur(120px)}
+.hero-glow-1{width:600px;height:600px;top:-200px;right:-100px;background:var(--red);opacity:.06}
+.hero-glow-2{width:400px;height:400px;bottom:-100px;left:-100px;background:var(--red-deep);opacity:.04}
+.hero-line{position:absolute;top:0;width:1px;height:100%;background:linear-gradient(to bottom,transparent,rgba(239,68,68,.15),transparent)}
+.hero-content{position:relative;z-index:10;max-width:920px;text-align:center}
+.hero-tag{font-family:var(--mono);font-size:13px;color:var(--red);letter-spacing:2px;margin-bottom:32px;display:block}
+.hero h1{font-size:clamp(40px,8vw,80px);font-weight:900;margin-bottom:32px;letter-spacing:1px;line-height:1.05}
+.hero .sub{font-size:clamp(16px,2vw,19px);color:var(--fg-muted);font-weight:400;line-height:1.8;max-width:640px;margin:0 auto 48px}
+.hero-btns{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:72px}
+.hero-metrics{display:flex;align-items:center;justify-content:center;gap:1px;flex-wrap:wrap}
+.hero-metric{text-align:center;padding:24px 40px;background:var(--bg-card);border:1px solid var(--border)}
+.hero-metric:first-child{border-radius:4px 0 0 4px}
+.hero-metric:last-child{border-radius:0 4px 4px 0}
+.hero-metric-num{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;color:var(--red-bright);margin-bottom:4px}
+.hero-metric-label{font-size:11px;color:var(--fg-dim);text-transform:uppercase;letter-spacing:2px;font-family:'Orbitron',sans-serif}
+@media(max-width:640px){.hero-metrics{flex-direction:column;gap:0}.hero-metric{width:100%;border-radius:0!important}.hero-metric:first-child{border-radius:4px 4px 0 0!important}.hero-metric:last-child{border-radius:0 0 4px 4px!important}}
+
+/* --- Sections --- */
+.section{padding:100px 0}
+.section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--red);font-family:'Orbitron',sans-serif;text-transform:uppercase;letter-spacing:3px;margin-bottom:20px}
+.section-label svg{width:16px;height:16px}
+.section-title{font-size:clamp(28px,5vw,48px);font-weight:800;margin-bottom:20px;letter-spacing:1px}
+.section-desc{font-size:17px;color:var(--fg-muted);max-width:580px;margin:0 auto;line-height:1.7}
+.section-line{border:none;height:1px;background:var(--border);margin:0}
+
+/* --- Services --- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px;background:var(--border)}
+@media(max-width:1024px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.svc-grid{grid-template-columns:1fr}}
+.svc-card{background:var(--bg);padding:40px 32px;transition:all .3s;position:relative;overflow:hidden}
+.svc-card:hover{background:var(--bg-card)}
+.svc-card:hover .svc-line{width:100%}
+.svc-card:hover .svc-icon svg{stroke:var(--red-bright)}
+.svc-line{position:absolute;top:0;left:0;height:2px;width:0;background:var(--red);transition:width .4s}
+.svc-icon{width:48px;height:48px;border:1px solid var(--border-light);display:flex;align-items:center;justify-content:center;margin-bottom:24px;transition:border-color .3s}
+.svc-card:hover .svc-icon{border-color:var(--red)}
+.svc-icon svg{width:22px;height:22px;stroke:var(--fg-dim);transition:stroke .3s}
+.svc-card h3{font-size:16px;font-weight:700;margin-bottom:12px;letter-spacing:.5px}
+.svc-card p{font-size:14px;color:var(--fg-dim);line-height:1.7}
+.svc-num{position:absolute;top:16px;right:20px;font-family:'Orbitron',sans-serif;font-size:11px;color:rgba(239,68,68,.2);font-weight:700;letter-spacing:2px}
+
+/* --- Process --- */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:64px;background:var(--border)}
+@media(max-width:1024px){.proc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.proc-grid{grid-template-columns:1fr}}
+.proc-card{background:var(--bg);padding:40px 28px;text-align:center;position:relative}
+.proc-num{font-family:'Orbitron',sans-serif;font-size:56px;font-weight:900;color:rgba(239,68,68,.08);margin-bottom:16px;line-height:1}
+.proc-card h3{font-size:14px;font-weight:700;margin-bottom:12px;letter-spacing:1px}
+.proc-card p{font-size:13px;color:var(--fg-dim);line-height:1.7}
+
+/* --- Preview Builds --- */
+.preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+@media(max-width:1024px){.preview-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.preview-grid{grid-template-columns:1fr}}
+.preview-card{position:relative;background:var(--bg-card);border:1px solid var(--border);overflow:hidden;transition:all .3s}
+.preview-card:hover{border-color:var(--red);box-shadow:0 0 40px var(--red-glow)}
+.preview-card:hover .preview-img img{transform:scale(1.05)}
+.preview-img{aspect-ratio:16/10;overflow:hidden;position:relative}
+.preview-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.preview-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8),transparent 40%)}
+.preview-type{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:10px;padding:4px 10px;background:rgba(0,0,0,.7);border:1px solid var(--border-light);color:var(--red-bright);letter-spacing:1px;text-transform:uppercase}
+.preview-body{padding:24px}
+.preview-body h3{font-size:15px;font-weight:700;margin-bottom:8px;letter-spacing:.5px}
+.preview-body p{font-size:13px;color:var(--fg-dim);line-height:1.6;margin-bottom:14px}
+.preview-tags{display:flex;gap:6px;flex-wrap:wrap}
+.preview-tag{padding:3px 10px;font-size:10px;font-weight:600;font-family:var(--mono);background:var(--red-glow);color:var(--red-bright);border:1px solid rgba(239,68,68,.1);letter-spacing:.5px}
+
+/* --- Pricing --- */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:64px;background:var(--border)}
+@media(max-width:1024px){.price-grid{grid-template-columns:1fr;max-width:450px;margin-left:auto;margin-right:auto;margin-top:64px;background:var(--border)}}
+.price-card{background:var(--bg);padding:48px 32px;text-align:center;position:relative}
+.price-card.featured{background:var(--bg-card);border-top:2px solid var(--red)}
+.price-card .price-label{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.price-card h3{font-size:20px;font-weight:700;margin-bottom:8px;letter-spacing:1px}
+.price-card .price-sub{font-size:13px;color:var(--fg-dim);margin-bottom:28px}
+.price-amt{font-family:'Orbitron',sans-serif;font-size:44px;font-weight:900;color:var(--fg);margin-bottom:4px;letter-spacing:-1px}
+.price-amt span{font-size:14px;font-weight:400;color:var(--fg-dim)}
+.price-note{font-size:12px;color:var(--fg-dim);margin-bottom:32px;font-family:var(--mono)}
+.price-features{text-align:left;display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
+.price-feat{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-muted)}
+.price-feat svg{width:16px;height:16px;stroke:var(--red-bright);flex-shrink:0}
+
+/* --- CTA --- */
+.cta-section{position:relative}
+.cta-box{border:1px solid var(--border);padding:clamp(48px,6vw,80px);text-align:center;position:relative;overflow:hidden;background:var(--bg-card)}
+.cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.cta-glow{position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(140px);opacity:.06;background:var(--red)}
+.cta-glow-1{top:-200px;left:50%;transform:translateX(-50%)}
+
+/* --- Footer --- */
+.footer{padding:80px 0 40px;border-top:1px solid var(--border)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-desc{font-size:14px;color:var(--fg-dim);margin:16px 0 24px;line-height:1.7;max-width:300px}
+.footer-h{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:3px;margin-bottom:20px}
+.footer-ul{display:flex;flex-direction:column;gap:14px}
+.footer-ul a{font-size:13px;color:var(--fg-dim);transition:color .2s}
+.footer-ul a:hover{color:var(--red-bright)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--fg-dim);font-family:var(--mono)}
+.footer-socials{display:flex;gap:8px}
+.footer-social{width:38px;height:38px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.footer-social:hover{border-color:var(--red);box-shadow:0 0 15px var(--red-glow)}
+.footer-social svg{width:16px;height:16px;stroke:var(--fg-dim)}
+.footer-social:hover svg{stroke:var(--red-bright)}
+
+/* --- Animations --- */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fadeUp .7s ease-out both}
+.anim-d1{animation-delay:.1s}.anim-d2{animation-delay:.2s}.anim-d3{animation-delay:.3s}.anim-d4{animation-delay:.4s}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.pulse{animation:pulse 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.cursor-blink::after{content:'_';animation:blink 1s step-end infinite;color:var(--red)}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<!-- ====================== NAVBAR ====================== -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">W</div>
+      <span class="logo-text">WEBUILDWEB</span>
+    </a>
+    <div class="nav-links">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#process" class="nav-link">Process</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="mailto:naboth188@gmail.com?subject=I%20Want%20to%20Start%20a%20Project&body=Hi%20WEBUILDWEB%2C%0A%0AI'm%20interested%20in%20starting%20a%20project.%20Here's%20a%20bit%20about%20what%20I%20need%3A%0A%0A" class="btn btn-sm btn-red">Start a Project</a>
+    </div>
+    <button class="mobile-toggle" id="menuBtn" aria-label="Open menu"><i data-lucide="menu" id="menuIcon"></i></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#process" onclick="closeMenu()">Process</a>
+    <a href="#work" onclick="closeMenu()">Work</a>
+    <a href="#pricing" onclick="closeMenu()">Pricing</a>
+    <a href="mailto:naboth188@gmail.com?subject=I%20Want%20to%20Start%20a%20Project&body=Hi%20WEBUILDWEB%2C%0A%0AI'm%20interested%20in%20starting%20a%20project.%20Here's%20a%20bit%20about%20what%20I%20need%3A%0A%0A" class="btn btn-sm btn-red" style="text-align:center;margin-top:8px" onclick="closeMenu()">Start a Project</a>
+  </div>
+</nav>
+
+<!-- ====================== HERO ====================== -->
+<section class="hero scanline">
+  <div class="hero-grid"></div>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-line" style="left:20%"></div>
+  <div class="hero-line" style="left:50%"></div>
+  <div class="hero-line" style="left:80%"></div>
+  <div class="hero-content">
+    <span class="hero-tag anim">// INITIALIZING_GROWTH_PROTOCOL <span class="cursor-blink"></span></span>
+    <h1 class="anim anim-d1">We Build Websites<br>That <span class="grad-text">Build Empires</span></h1>
+    <p class="sub anim anim-d2">High-converting websites, AI automation, and growth systems engineered to turn your business into a machine. Not just online — unstoppable.</p>
+    <div class="hero-btns anim anim-d3">
+      <a href="mailto:naboth188@gmail.com?subject=I%20Want%20to%20Launch%20a%20Project&body=Hi%20WEBUILDWEB%2C%0A%0AI'm%20ready%20to%20launch%20a%20project.%20Here's%20what%20I'm%20looking%20for%3A%0A%0A" class="btn btn-lg btn-red">Launch Your Project <i data-lucide="arrow-right"></i></a>
+      <a href="#work" class="btn btn-lg btn-ghost">View Our Builds <i data-lucide="external-link"></i></a>
+    </div>
+    <div class="hero-metrics anim anim-d4">
+      <div class="hero-metric"><div class="hero-metric-num">6</div><div class="hero-metric-label">Core Services</div></div>
+      <div class="hero-metric"><div class="hero-metric-num">100%</div><div class="hero-metric-label">Custom Built</div></div>
+      <div class="hero-metric"><div class="hero-metric-num">24H</div><div class="hero-metric-label">Response Time</div></div>
+      <div class="hero-metric"><div class="hero-metric-num">∞</div><div class="hero-metric-label">Revisions</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-line">
+
+<!-- ====================== SERVICES ====================== -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label"><i data-lucide="terminal"></i> Systems Online</div>
+      <h2 class="section-title">Six Ways We<br><span class="red-text">Automate Your Growth</span></h2>
+      <p class="section-desc">From the website that captures leads to the AI that nurtures them — we build the entire system so nothing falls through the cracks.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-line"></div><span class="svc-num">001</span>
+        <div class="svc-icon"><i data-lucide="globe"></i></div>
+        <h3>Website Design & Dev</h3>
+        <p>Custom-coded, conversion-optimized websites that load in under 2 seconds and turn visitors into paying customers. No templates, no WordPress bloat.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-line"></div><span class="svc-num">002</span>
+        <div class="svc-icon"><i data-lucide="search"></i></div>
+        <h3>SEO Optimization</h3>
+        <p>Rank on page one. Technical SEO, keyword strategy, local search domination, and content architecture that compounds organic traffic month over month.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-line"></div><span class="svc-num">003</span>
+        <div class="svc-icon"><i data-lucide="mail"></i></div>
+        <h3>Email Automation</h3>
+        <p>Automated email sequences that nurture leads while you sleep. Welcome series, abandoned carts, follow-ups, and re-engagement campaigns — all on autopilot.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-line"></div><span class="svc-num">004</span>
+        <div class="svc-icon"><i data-lucide="bot"></i></div>
+        <h3>AI Chatbot Integration</h3>
+        <p>Intelligent chatbots that qualify leads, answer FAQs, and book appointments 24/7. Your AI never sleeps, never takes breaks, and never misses a customer.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-line"></div><span class="svc-num">005</span>
+        <div class="svc-icon"><i data-lucide="calendar-check"></i></div>
+        <h3>Appointment Booking</h3>
+        <p>Automated scheduling systems that sync with your calendar, send reminders, and reduce no-shows by 60%. Clients book themselves — zero back-and-forth.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-line"></div><span class="svc-num">006</span>
+        <div class="svc-icon"><i data-lucide="phone-missed"></i></div>
+        <h3>Missed Call Text Back</h3>
+        <p>Never lose a lead again. When you miss a call, an instant automated text reaches the caller within seconds — keeping the conversation alive and the lead warm.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-line">
+
+<!-- ====================== PROCESS ====================== -->
+<section id="process" class="section">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label"><i data-lucide="cpu"></i> Execution Protocol</div>
+      <h2 class="section-title">From Zero to Live<br>In 4 Phases</h2>
+      <p class="section-desc">A precision-engineered workflow. Clear milestones, daily updates, and zero surprises.</p>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-card">
+        <div class="proc-num">01</div>
+        <h3>Discovery</h3>
+        <p>We dissect your goals, audience, and competitors. You leave with a blueprint — no commitment, just a clear plan of attack.</p>
+      </div>
+      <div class="proc-card">
+        <div class="proc-num">02</div>
+        <h3>Design</h3>
+        <p>Interactive mockups you can click through before a single line of code is written. Unlimited revisions until it's perfect.</p>
+      </div>
+      <div class="proc-card">
+        <div class="proc-num">03</div>
+        <h3>Build</h3>
+        <p>Every pixel implemented with clean, fast code. Daily progress updates. Tested across every device and browser.</p>
+      </div>
+      <div class="proc-card">
+        <div class="proc-num">04</div>
+        <h3>Deploy</h3>
+        <p>We handle launch, DNS, SSL, analytics, and automation setup. Post-launch training so you own every system we build.</p>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:64px">
+      <a href="mailto:naboth188@gmail.com?subject=I'd%20Like%20to%20Book%20a%20Discovery%20Call&body=Hi%20WEBUILDWEB%2C%0A%0AI'd%20like%20to%20schedule%20a%20free%20discovery%20call.%20Here's%20a%20bit%20about%20my%20business%3A%0A%0A" class="btn btn-lg btn-red">Book a Discovery Call <i data-lucide="arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-line">
+
+<!-- ====================== PREVIEW BUILDS ====================== -->
+<section id="work" class="section">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label"><i data-lucide="monitor"></i> System Demos</div>
+      <h2 class="section-title">Preview Builds &<br><span class="red-text">Concept Designs</span></h2>
+      <p class="section-desc">A showcase of the types of sites and systems we build. Each one engineered for conversion, speed, and scale.</p>
+    </div>
+    <div class="preview-grid">
+      <div class="preview-card">
+        <div class="preview-img">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="SaaS Dashboard Preview" loading="lazy">
+          <span class="preview-type">SaaS Dashboard</span>
+        </div>
+        <div class="preview-body">
+          <h3>Analytics Command Center</h3>
+          <p>Real-time data visualization dashboard with AI-powered insights and automated reporting.</p>
+          <div class="preview-tags"><span class="preview-tag">React</span><span class="preview-tag">API</span><span class="preview-tag">Dashboard</span></div>
+        </div>
+      </div>
+      <div class="preview-card">
+        <div class="preview-img">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80" alt="E-Commerce Store Preview" loading="lazy">
+          <span class="preview-type">E-Commerce</span>
+        </div>
+        <div class="preview-body">
+          <h3>Premium Online Store</h3>
+          <p>Full e-commerce experience with AI chatbot, email automations, and abandoned cart recovery built in.</p>
+          <div class="preview-tags"><span class="preview-tag">Shopify</span><span class="preview-tag">AI Bot</span><span class="preview-tag">Email</span></div>
+        </div>
+      </div>
+      <div class="preview-card">
+        <div class="preview-img">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Corporate Website Preview" loading="lazy">
+          <span class="preview-type">Corporate</span>
+        </div>
+        <div class="preview-body">
+          <h3>Professional Services Site</h3>
+          <p>SEO-optimized corporate site with appointment booking, chatbot, and missed call text back active.</p>
+          <div class="preview-tags"><span class="preview-tag">SEO</span><span class="preview-tag">Booking</span><span class="preview-tag">Chatbot</span></div>
+        </div>
+      </div>
+      <div class="preview-card">
+        <div class="preview-img">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Lead Gen Platform Preview" loading="lazy">
+          <span class="preview-type">Lead Gen</span>
+        </div>
+        <div class="preview-body">
+          <h3>Automated Lead Machine</h3>
+          <p>Landing pages + email sequences + AI qualification. Captures, nurtures, and books leads on autopilot.</p>
+          <div class="preview-tags"><span class="preview-tag">Funnel</span><span class="preview-tag">Email</span><span class="preview-tag">AI</span></div>
+        </div>
+      </div>
+      <div class="preview-card">
+        <div class="preview-img">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Local Business Website Preview" loading="lazy">
+          <span class="preview-type">Local Biz</span>
+        </div>
+        <div class="preview-body">
+          <h3>Local Service Business</h3>
+          <p>Conversion-optimized local business site with Google SEO, booking widget, and missed call automation.</p>
+          <div class="preview-tags"><span class="preview-tag">Local SEO</span><span class="preview-tag">Booking</span><span class="preview-tag">SMS</span></div>
+        </div>
+      </div>
+      <div class="preview-card">
+        <div class="preview-img">
+          <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80" alt="Portfolio Website Preview" loading="lazy">
+          <span class="preview-type">Portfolio</span>
+        </div>
+        <div class="preview-body">
+          <h3>Creator Portfolio</h3>
+          <p>Stunning personal brand site with integrated contact forms, social proof, and automated follow-up sequences.</p>
+          <div class="preview-tags"><span class="preview-tag">Branding</span><span class="preview-tag">Email</span><span class="preview-tag">Design</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-line">
+
+<!-- ====================== PRICING ====================== -->
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label"><i data-lucide="zap"></i> Investment</div>
+      <h2 class="section-title">Choose Your<br><span class="red-text">Growth Tier</span></h2>
+      <p class="section-desc">Transparent pricing. No hidden fees. Every tier includes unlimited revisions and post-launch support.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-label">// tier_01</div>
+        <h3>Launch</h3>
+        <p class="price-sub">Website + basic automation</p>
+        <div class="price-amt">$2,500 <span>one-time</span></div>
+        <p class="price-note">DELIVERED_IN: 2-3 WEEKS</p>
+        <div class="price-features">
+          <div class="price-feat"><i data-lucide="check"></i> Custom website (up to 5 pages)</div>
+          <div class="price-feat"><i data-lucide="check"></i> Mobile responsive design</div>
+          <div class="price-feat"><i data-lucide="check"></i> Basic SEO setup</div>
+          <div class="price-feat"><i data-lucide="check"></i> Contact form</div>
+          <div class="price-feat"><i data-lucide="check"></i> 30 days support</div>
+        </div>
+        <a href="mailto:naboth188@gmail.com?subject=Interested%20in%20the%20Launch%20Plan%20(%242%2C500)&body=Hi%20WEBUILDWEB%2C%0A%0AI'm%20interested%20in%20the%20Launch%20plan.%20Can%20we%20set%20up%20a%20call%3F%0A%0A" class="btn btn-lg btn-ghost" style="width:100%">Select Plan</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-label">// tier_02 [RECOMMENDED]</div>
+        <h3>Scale</h3>
+        <p class="price-sub">Website + full automation stack</p>
+        <div class="price-amt">$5,000 <span>one-time</span></div>
+        <p class="price-note">DELIVERED_IN: 3-4 WEEKS</p>
+        <div class="price-features">
+          <div class="price-feat"><i data-lucide="check"></i> Custom website (up to 10 pages)</div>
+          <div class="price-feat"><i data-lucide="check"></i> Full SEO optimization</div>
+          <div class="price-feat"><i data-lucide="check"></i> AI chatbot integration</div>
+          <div class="price-feat"><i data-lucide="check"></i> Email automation (3 sequences)</div>
+          <div class="price-feat"><i data-lucide="check"></i> Appointment booking system</div>
+          <div class="price-feat"><i data-lucide="check"></i> Missed call text back</div>
+          <div class="price-feat"><i data-lucide="check"></i> 90 days priority support</div>
+        </div>
+        <a href="mailto:naboth188@gmail.com?subject=Interested%20in%20the%20Scale%20Plan%20(%245%2C000)&body=Hi%20WEBUILDWEB%2C%0A%0AI'm%20interested%20in%20the%20Scale%20plan%20with%20full%20automation.%20Can%20we%20set%20up%20a%20call%3F%0A%0A" class="btn btn-lg btn-red" style="width:100%">Select Plan</a>
+      </div>
+      <div class="price-card">
+        <div class="price-label">// tier_03</div>
+        <h3>Dominate</h3>
+        <p class="price-sub">Full system + ongoing growth</p>
+        <div class="price-amt">Custom</div>
+        <p class="price-note">SCOPE_DEPENDENT</p>
+        <div class="price-features">
+          <div class="price-feat"><i data-lucide="check"></i> Everything in Scale</div>
+          <div class="price-feat"><i data-lucide="check"></i> Unlimited pages & features</div>
+          <div class="price-feat"><i data-lucide="check"></i> Custom web application</div>
+          <div class="price-feat"><i data-lucide="check"></i> Advanced AI workflows</div>
+          <div class="price-feat"><i data-lucide="check"></i> Monthly SEO retainer</div>
+          <div class="price-feat"><i data-lucide="check"></i> Dedicated account manager</div>
+        </div>
+        <a href="mailto:naboth188@gmail.com?subject=Interested%20in%20the%20Dominate%20Plan%20(Custom)&body=Hi%20WEBUILDWEB%2C%0A%0AI'm%20interested%20in%20a%20custom%20solution.%20Here's%20what%20I%20need%3A%0A%0A" class="btn btn-lg btn-ghost" style="width:100%">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-line">
+
+<!-- ====================== CTA ====================== -->
+<section id="cta" class="section cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <div class="cta-glow cta-glow-1"></div>
+      <div style="position:relative;z-index:10">
+        <div class="section-label" style="justify-content:center"><i data-lucide="rocket"></i> Execute</div>
+        <h2 class="section-title" style="margin-bottom:20px">Your Competitors Are<br><span class="grad-text">Already Online</span></h2>
+        <p style="font-size:17px;color:var(--fg-muted);max-width:520px;margin:0 auto 16px;line-height:1.7">Every day without a system is money left on the table. Book a free discovery call — we'll map out exactly what your business needs to dominate online.</p>
+        <p style="font-size:12px;color:var(--fg-dim);margin-bottom:40px;font-family:var(--mono);letter-spacing:1px">ZERO_COMMITMENT // RESPONSE_TIME: 24H</p>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px">
+          <a href="mailto:naboth188@gmail.com?subject=I'd%20Like%20to%20Book%20a%20Free%20Discovery%20Call&body=Hi%20WEBUILDWEB%2C%0A%0AI'd%20like%20to%20book%20a%20free%20discovery%20call.%20Here's%20a%20bit%20about%20my%20business%20and%20what%20I%20need%3A%0A%0A" class="btn btn-xl btn-red" style="box-shadow:0 0 50px var(--red-glow-strong),0 8px 30px rgba(0,0,0,.5)">Book Free Discovery Call <i data-lucide="calendar"></i></a>
+          <a href="mailto:naboth188@gmail.com" class="btn btn-lg btn-ghost"><i data-lucide="mail"></i> naboth188@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:4px"><div class="logo-mark">W</div><span class="logo-text">WEBUILDWEB</span></div>
+        <p class="footer-desc">We build websites, automations, and AI systems that turn businesses into growth machines. From concept to conversion.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" class="footer-social" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          <a href="#" class="footer-social" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-h">Services</h4>
+        <ul class="footer-ul">
+          <li><a href="#">Website Design</a></li>
+          <li><a href="#">SEO Optimization</a></li>
+          <li><a href="#">Email Automation</a></li>
+          <li><a href="#">AI Chatbots</a></li>
+          <li><a href="#">Appointment Booking</a></li>
+          <li><a href="#">Missed Call Text Back</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-h">Company</h4>
+        <ul class="footer-ul">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#work">Our Work</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-h">Contact</h4>
+        <ul class="footer-ul">
+          <li><a href="mailto:naboth188@gmail.com">naboth188@gmail.com</a></li>
+          <li><a href="tel:+12404218510">(240) 421-8510</a></li>
+          <li><span style="color:var(--fg-dim)">Mon–Fri: 9am – 6pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 WEBUILDWEB // ALL_RIGHTS_RESERVED</p>
+      <div style="display:flex;gap:24px"><a href="#" style="color:var(--fg-dim)">Privacy</a><a href="#" style="color:var(--fg-dim)">Terms</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+lucide.createIcons();
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50)});
+
+var menuOpen=false;
+document.getElementById('menuBtn').addEventListener('click',function(){
+  menuOpen=!menuOpen;
+  document.getElementById('mobileMenu').classList.toggle('open',menuOpen);
+  this.setAttribute('aria-expanded',menuOpen);
+  document.getElementById('menuIcon').setAttribute('data-lucide',menuOpen?'x':'menu');
+  lucide.createIcons();
+});
+function closeMenu(){
+  menuOpen=false;
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('menuBtn').setAttribute('aria-expanded','false');
+  document.getElementById('menuIcon').setAttribute('data-lucide','menu');
+  lucide.createIcons();
+}
+
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.style.opacity='1';
+      entry.target.style.animation='fadeUp .6s ease-out both';
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.05});
+
+document.querySelectorAll('.svc-card,.proc-card,.preview-card,.price-card').forEach(function(el,i){
+  el.style.opacity='0';
+  el.style.animationDelay=(i*0.05)+'s';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
